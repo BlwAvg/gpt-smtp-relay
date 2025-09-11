@@ -124,6 +124,12 @@ trusted.sender@example.com
 another.trusted@example.com
 ```
 
+Unauthorized sender get response:
+(this can be edited in the gpt-relay.py)
+```
+Sender {from_addr} not authorized.
+```
+
 ---
 
 ## 🔍 Logs
