@@ -31,7 +31,8 @@ Generate an **App Password** for this service:
 
 Save the generated password — this will be used in `config.env`.
 
-### 3. Install Python Prerequisites
+### 3. Install Python Prerequisites<br>
+This assume Ubuntu or debian
 
 Ensure required packages are installed:
 
