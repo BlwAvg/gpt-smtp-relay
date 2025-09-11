@@ -58,9 +58,9 @@ After=network.target
 [Service]
 User=***USERNAME_HERE***
 Group=***GROUP_HERE***
-WorkingDirectory=/***FILE LOCATION HERE***/gpt-relay
+WorkingDirectory=/***FILE LOCATION HERE***/gpt-smtp-relay/gpt-relay
 Environment=PYTHONUNBUFFERED=1
-ExecStart=/usr/bin/python3 -u /***FILE LOCATION HERE***/gpt-relay/gpt-relay.py
+ExecStart=/usr/bin/python3 -u /***FILE LOCATION HERE***/gpt-smtp-relay/gpt-relay.py
 Restart=always
 RestartSec=5
 StandardOutput=journal
