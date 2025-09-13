@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ title or "WebUI" }}</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #eee;
+      font-family: "Segoe UI", Arial, sans-serif;
+      margin: 0;
+    }
+    header {
+      background: #111;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #222;
+    }
+    header h1 {
+      color: #0f0;
+      margin: 0;
+      font-size: 20px;
+    }
+    nav a {
+      color: #aaa;
+      text-decoration: none;
+      margin-left: 20px;
+      padding: 8px 12px;
+      border-radius: 6px;
+    }
+    nav a.active, nav a:hover {
+      background: #0f0;
+      color: #000;
+    }
+    main {
+      padding: 20px;
+    }
+    button {
+      background: #111;
+      color: #0f0;
+      border: 1px solid #0f0;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin: 5px 5px 5px 0;
+    }
+    button:hover {
+      background: #0f0;
+      color: #000;
+    }
+    textarea, input, select {
+      width: 100%;
+      background: #111;
+      color: #0f0;
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 8px;
+      font-family: monospace;
+      margin-top: 5px;
+    }
+    textarea.large { height: 250px; }
+    textarea.prompt { height: 150px; }
+    .section {
+      margin-bottom: 25px;
+      padding: 15px;
+      border: 1px solid #222;
+      border-radius: 8px;
+      background: #080808;
+    }
+    .section h2 {
+      margin-top: 0;
+      color: #0f0;
+      font-size: 16px;
+    }
+    pre.log {
+      background: #111;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #333;
+      color: #0f0;
+      font-family: monospace;
+      overflow-y: auto;
+      max-height: 70vh;
+      white-space: pre-wrap;
+    }
+    .top-right {
+      float: right;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Admin Panel</h1>
+    <nav>
+      <a href="{{ url_for('index') }}" class="{% if active == 'config' %}active{% endif %}">Config</a>
+      <a href="{{ url_for('logs') }}" class="{% if active == 'logs' %}active{% endif %}">Logs</a>
+      <a href="{{ url_for('backups') }}" class="{% if request.path.startswith('/backups') %}active{% endif %}">Backups</a>
+      <a href="{{ url_for('troubleshooting') }}" class="{% if request.path.startswith('/troubleshooting') %}active{% endif %}">Troubleshooting</a>
+    </nav>
+  </header>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

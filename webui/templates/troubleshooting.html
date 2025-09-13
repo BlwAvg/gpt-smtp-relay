@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Troubleshooting</h2>
+
+<!-- gpt-relay controls -->
+<div class="section">
+  <h3>gpt-relay.service</h3>
+  <form method="POST">
+    <button name="restart_gpt">Restart</button>
+    <button name="stop_gpt">Stop</button>
+    <button name="start_gpt">Start</button>
+    <button name="status_gpt">Status</button>
+  </form>
+</div>
+
+<!-- webui controls -->
+<div class="section">
+  <h3>webui-gpt-relay.service</h3>
+  <form method="POST">
+    <button name="restart_webui">Restart</button>
+  </form>
+</div>
+
+<!-- system diagnostics -->
+<div class="section">
+  <h3>System Diagnostics</h3>
+  <form method="POST">
+    <button name="disk">Show Disk Space (df -h)</button>
+    <button name="memory">Show Memory (free -h)</button>
+    <button name="reboot">Reboot Server</button>
+  </form>
+</div>
+
+<!-- connectivity tests -->
+<div class="section">
+  <h3>Connectivity & Auth Tests</h3>
+  <form method="POST">
+    <button name="ping_gmail">Ping Gmail (smtp.gmail.com)</button>
+    <button name="ping_openai">Ping OpenAI (api.openai.com)</button>
+    <button name="test_openai_auth">Test OpenAI API Key</button>
+    <button name="test_gmail_auth">Test Gmail Authentication</button>
+  </form>
+</div>
+
+<!-- openai models -->
+<div class="section">
+  <h3>OpenAI Models</h3>
+  <p>This requires a valid <code>OPENAI_API_KEY</code> in <b>config.env</b>.</p>
+  <form method="POST">
+    <button name="fetch_models">Fetch Models</button>
+  </form>
+  {% if error %}
+    <div style="color: red;">{{ error }}</div>
+  {% endif %}
+  {% if models %}
+    <ul>
+      {% for model in models %}
+        <li>{{ model }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</div>
+
+{% if output %}
+<div class="section">
+  <h3>Command Output</h3>
+  <pre style="background:#111; color:#0f0; padding:10px; border-radius:8px;">{{ output }}</pre>
+</div>
+{% endif %}
+
+{% endblock %}

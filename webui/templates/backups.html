@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Backups</h2>
+<ul>
+  {% for b in backups %}
+    <li>
+      <a href="{{ url_for('view_backup', filename=b.name) }}">{{ b.mtime }}</a>
+    </li>
+  {% else %}
+    <li>No backups available.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

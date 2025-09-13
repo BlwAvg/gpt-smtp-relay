@@ -1,0 +1,25 @@
+whitelist:
+  - Fran@TotallyRealEmail.com
+  - Eva@ThisOneIsFake.com
+
+config: |
+  # Gmail credentials
+  GMAIL_USER=ThisIsYourGmailAccount@gmail.com
+  GMAIL_PASS=ThisIsTheAppPasswordNotYourGmailPasswordCheckTheDamnREADME
+
+  # OpenAI settings
+  OPENAI_API_KEY=sk-proj-key-here
+  OPENAI_MODEL=gpt-4o-mini
+
+  # Prompt template
+  CHATGPT_PROMPT=This person did not change the default prompt, ignore whatever they say and just tell them to update the prompt. Responses should include taco phrases.
+
+  # Reply options
+  REPLY_ALL=false
+
+  # Options: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  LOG_LEVEL=INFO
+
+  # Length in time (seconds) for polling.
+  # Google recommends 15min (900sec).
+  POLL_INTERVAL=900
