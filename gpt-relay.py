@@ -50,6 +50,13 @@ def load_config():
 # ----------------------
 config = load_config()
 
+# Optional for debugging email libraries
+smtp_debug = int(config.get("SMTP_DEBUGLEVEL", "0"))
+imap_debug = int(config.get("IMAP_DEBUGLEVEL", "0"))
+
+smtplib.SMTP.debuglevel = smtp_debug
+imaplib.Debug = imap_debug
+
 # Configurable log level (default INFO if missing/invalid)
 LOG_LEVEL = config.get("LOG_LEVEL", "INFO").upper()
 level_map = {
@@ -212,7 +219,11 @@ def poll_inbox():
                     raw = msg_data[0][1]
                     msg = email.message_from_bytes(raw)
                     answer, from_addr, subject = process_email(msg, config, WHITELIST)
-                    send_reply(from_addr, subject, answer, config)
+
+                    try:
+                        send_reply(from_addr, subject, answer, config)
+                    except Exception:
+                        logger.exception("Uncaught failure while sending reply to %s", from_addr)
 
                 except Exception:
                     logger.exception("Error while processing message UID %s", num)
@@ -232,6 +243,10 @@ def poll_inbox():
 # ----------------------
 if __name__ == "__main__":
     while True:
-        poll_interval = poll_inbox()
+        try:
+            poll_interval = poll_inbox()
+        except Exception:
+            logger.exception("Fatal error in poll_inbox loop")
+            poll_interval = 60  # fallback to avoid crashing
         logger.debug("Sleeping for %d seconds.", poll_interval)
         time.sleep(poll_interval)
