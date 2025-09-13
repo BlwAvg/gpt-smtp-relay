@@ -247,6 +247,10 @@ if __name__ == "__main__":
             poll_interval = poll_inbox()
         except Exception:
             logger.exception("Fatal error in poll_inbox loop")
-            poll_interval = 60  # fallback to avoid crashing
+            cfg = load_config()
+            poll_interval = int(cfg.get("POLL_INTERVAL", "900"))
         logger.debug("Sleeping for %d seconds.", poll_interval)
         time.sleep(poll_interval)
+
+
+
