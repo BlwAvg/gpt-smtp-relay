@@ -73,6 +73,7 @@ LOG_LEVEL = level_map.get(LOG_LEVEL, logging.INFO)
 # ----------------------
 logger = logging.getLogger("gmail_bot")
 logger.setLevel(LOG_LEVEL)
+logging.Formatter.converter = time.localtime
 
 file_handler = RotatingFileHandler(
     "service.log", maxBytes=1_000_000, backupCount=5, encoding="utf-8"
