@@ -65,7 +65,7 @@ The app will listen on **port 8080** by default.
 
 ## Systemd Service
 
-Create a systemd service file at `/etc/systemd/system/webui-gpt-relay.service`:
+Create a systemd service file at `sudo nano /etc/systemd/system/webui-gpt-relay.service`:
 
 ```ini
 [Unit]
@@ -74,8 +74,8 @@ After=network.target
 
 [Service]
 User=webui
-WorkingDirectory=/home/webui/webui
-ExecStart=/usr/bin/python3 /home/webui/webui/webui.py
+WorkingDirectory=/opt/gpt-smtp-relay/webui/
+ExecStart=/usr/bin/python3 /opt/gpt-smtp-relay/webui/webui.py
 Restart=always
 Environment=PYTHONUNBUFFERED=1
 
