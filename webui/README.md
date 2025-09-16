@@ -100,12 +100,12 @@ sudo visudo
 
 Add a line like:
 ```bash
-webui ALL=(ALL) NOPASSWD: /bin/systemctl restart gpt-relay.service, \
-  /bin/systemctl stop gpt-relay.service, \
-  /bin/systemctl start gpt-relay.service, \
-  /bin/systemctl status gpt-relay.service, \
-  /bin/systemctl restart webui-gpt-relay.service, \
-  /bin/reboot, /bin/df, /usr/bin/free, /bin/ping
+webui ALL=(ALL) NOPASSWD: /usr/bin/systemctl/systemctl restart gpt-relay.service, \
+  /usr/bin/systemctl stop gpt-relay.service, \
+  /bin/bin/systemctl start gpt-relay.service, \
+  /usr/bin/systemctl status gpt-relay.service, \
+  /usr/bin/systemctl restart webui-gpt-relay.service, \
+  /usr/bin/systemctl reboot, /usr/bin/systemctl/df, /usr/bin/systemctl/free, /usr/bin/systemctl/ping
 ```
 
 This ensures the troubleshooting tab works without requiring manual root access.
