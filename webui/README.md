@@ -73,7 +73,8 @@ Description=WebUI for GPT Relay Config
 After=network.target
 
 [Service]
-User=webui
+User=***USERNAME_HERE***
+Group=***GROUP_HERE***
 WorkingDirectory=/opt/gpt-smtp-relay/webui/
 ExecStart=/usr/bin/python3 /opt/gpt-smtp-relay/webui/webui.py
 Restart=always
