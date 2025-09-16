@@ -42,6 +42,8 @@ sudo apt install python3-dotenv python3-imaplib2
 ```
 
 ### 4. Create a Systemd Service
+- This assume service is in /opt/
+- May need to enable `sudo systemctl enable systemd-networkd-wait-online.service` or equivalent service.
 
 Create the service definition:
 
@@ -54,13 +56,15 @@ Paste the following, replacing placeholders with your username, group, and file 
 ```ini
 [Unit]
 Description=GPT Relay Service
-After=network.target
+After=network-online.target nss-lookup.target
+Wants=network-online.target nss-lookup.target
 
 [Service]
 User=***USERNAME_HERE***
 Group=***GROUP_HERE***
 WorkingDirectory=/opt/gpt-smtp-relay
 Environment=PYTHONUNBUFFERED=1
+ExecStartPre=/bin/sleep 10
 ExecStart=/usr/bin/python3 -u /opt/gpt-smtp-relay/gpt-relay.py
 Restart=always
 RestartSec=5
